@@ -1,0 +1,60 @@
+import type { Metadata, Viewport } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { siteConfig } from "@/content/site";
+import "./globals.css";
+
+const geistSans = GeistSans;
+const geistMono = GeistMono;
+
+const title = `${siteConfig.name} — ${siteConfig.role}`;
+const description = `${siteConfig.name} is a ${siteConfig.role.toLowerCase()} in ${siteConfig.location} building production Android apps with Flutter, Kotlin, and Java.`;
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: title,
+    template: `%s — ${siteConfig.name}`,
+  },
+  description,
+  keywords: ["Android Developer", "Flutter", "Kotlin", "Java", "Mobile Developer", "Gurugram", siteConfig.name],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050505",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  return (
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-fg focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-bg"
+        >
+          Skip to content
+        </a>
+        {children}
+      </body>
+    </html>
+  );
+}

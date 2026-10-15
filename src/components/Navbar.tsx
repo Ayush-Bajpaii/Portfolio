@@ -1,0 +1,145 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { navLinks, siteConfig } from "@/content/site";
+import { Container } from "@/components/ui/Container";
+import { cn } from "@/lib/utils";
+
+export function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState<string>("");
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const ids = navLinks.map((l) => l.href.slice(1));
+    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    if (!sections.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(`#${visible.target.id}`);
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.2, 0.5] },
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  return (
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 border-b border-border transition-[background-color] duration-300",
+        scrolled || open ? "bg-bg/90 backdrop-blur-sm" : "bg-bg",
+      )}
+    >
+      <Container className="flex h-14 items-center justify-between">
+        <Link
+          href="#top"
+          className="font-mono text-[12px] uppercase tracking-[0.18em] text-fg transition-colors hover:text-hover"
+          aria-label={`${siteConfig.name}, back to top`}
+        >
+          {siteConfig.name}
+        </Link>
+
+        <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={active === link.href ? "true" : undefined}
+              className={cn(
+                "relative py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200",
+                active === link.href ? "text-fg" : "text-fg-dim hover:text-hover",
+              )}
+            >
+              {link.label}
+              {active === link.href && (
+                <motion.span
+                  layoutId="nav-active"
+                  transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 36 }}
+                  className="absolute inset-x-0 -bottom-[17px] h-px bg-fg"
+                />
+              )}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-5">
+          <Link
+            href="#contact"
+            className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-fg-muted transition-colors hover:text-hover sm:inline-flex"
+          >
+            Let&apos;s Talk
+            <span aria-hidden="true" className="ml-1.5">
+              ↗
+            </span>
+          </Link>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="grid size-9 place-items-center text-fg-muted transition-colors hover:text-hover md:hidden"
+          >
+            {open ? <X className="size-4" strokeWidth={1.5} /> : <Menu className="size-4" strokeWidth={1.5} />}
+          </button>
+        </div>
+      </Container>
+
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            id="mobile-nav"
+            aria-label="Mobile"
+            initial={reduce ? false : { opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+            className="border-t border-border bg-bg md:hidden"
+          >
+            <Container className="flex flex-col py-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border py-4 font-mono text-[12px] uppercase tracking-[0.18em] text-fg-muted transition-colors last:border-b-0 hover:text-hover"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="py-4 font-mono text-[12px] uppercase tracking-[0.18em] text-fg"
+              >
+                Let&apos;s Talk ↗
+              </Link>
+            </Container>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
