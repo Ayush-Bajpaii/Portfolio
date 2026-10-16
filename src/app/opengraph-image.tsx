@@ -16,8 +16,8 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "#050505",
-          color: "#F5F5F5",
+          background: "#ffffff",
+          color: "#0a0a0a",
           fontFamily: "sans-serif",
         }}
       >
@@ -27,9 +27,9 @@ export default function OpenGraphImage() {
               width: 48,
               height: 48,
               borderRadius: 10,
-              border: "1px solid #242424",
-              background: "#090909",
-              color: "#F5F5F5",
+              border: "1px solid #e4e4e4",
+              background: "#f6f6f6",
+              color: "#0a0a0a",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -39,11 +39,11 @@ export default function OpenGraphImage() {
           >
             {siteConfig.shortName}
           </div>
-          <div style={{ fontSize: 24, color: "#A3A3A3" }}>{siteConfig.name}</div>
+          <div style={{ fontSize: 24, color: "#525252" }}>{siteConfig.name}</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <div style={{ fontSize: 18, letterSpacing: 4, color: "#F5F5F5", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 18, letterSpacing: 4, color: "#0a0a0a", textTransform: "uppercase" }}>
             {siteConfig.eyebrow}
           </div>
           <div style={{ fontSize: 60, fontWeight: 600, lineHeight: 1.1, letterSpacing: -2, maxWidth: 1000 }}>
@@ -51,10 +51,10 @@ export default function OpenGraphImage() {
           </div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 22, color: "#A3A3A3" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 22, color: "#525252" }}>
           <div>Flutter · Kotlin · Java · Native Android</div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 10, height: 10, borderRadius: 999, background: "#696969" }} />
+            <div style={{ width: 10, height: 10, borderRadius: 999, background: "#6b6b6b" }} />
             {siteConfig.location}
           </div>
         </div>
