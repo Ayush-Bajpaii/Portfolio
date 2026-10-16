@@ -213,13 +213,13 @@ export const skillGroups = [
 ];
 
 export const education = [
-  { degree: "Master of Computer Applications (MCA)", school: "Tezpur University", year: "2025", note: "CGPA 6.99" },
-  { degree: "Bachelor of Science (B.Sc.)", school: "Chhatrapati Shahu Ji Maharaj University", year: "2021", note: "68.44%" },
+  { degree: "Master of Computer Applications (MCA)", school: "Tezpur University", url: "https://www.tezu.ernet.in/", year: "2025" },
+  { degree: "Bachelor of Science (B.Sc.)", school: "Chhatrapati Shahu Ji Maharaj University", url: "https://csjmu.ac.in/", year: "2021" },
 ];
 
 export const codingProfiles = [
-  { label: "LeetCode", value: "600+ problems", href: siteConfig.social.leetcode },
-  { label: "GeeksforGeeks", value: "312+ problems", href: siteConfig.social.geeksforgeeks },
+  { label: "LeetCode", href: siteConfig.social.leetcode },
+  { label: "GeeksforGeeks", href: siteConfig.social.geeksforgeeks },
 ];
 
 // Dedicated case study for the company marketing website.

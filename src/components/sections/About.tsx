@@ -17,9 +17,15 @@ export function About() {
                   <dt className="font-sans text-[13px] font-medium text-fg-dim">{e.year}</dt>
                   <dd>
                     <p className="text-fg">{e.degree}</p>
-                    <p className="text-fg-muted">
-                      {e.school} · {e.note}
-                    </p>
+                    <a
+                      href={e.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-fg-muted transition-colors hover:text-hover"
+                    >
+                      {e.school}
+                      <ArrowUpRight className="size-3.5 text-fg-dim" strokeWidth={1.5} />
+                    </a>
                   </dd>
                 </div>
               ))}
@@ -34,7 +40,7 @@ export function About() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-fg transition-colors hover:text-hover"
                     >
-                      {p.label} <span className="text-fg-muted">{p.value}</span>
+                      {p.label}
                       <ArrowUpRight className="size-3.5 text-fg-dim" strokeWidth={1.5} />
                     </a>
                   ))}

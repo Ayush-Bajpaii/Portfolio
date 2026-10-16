@@ -20,7 +20,7 @@ export function Website() {
               href={website.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 border-b border-fg-dim pb-0.5 text-sm text-fg transition-colors hover:border-fg hover:text-hover"
+              className="inline-flex h-10 items-center gap-2 rounded-full bg-fg px-4 text-sm font-medium text-bg transition-[background-color,transform,opacity] duration-200 ease-out hover:bg-fg/85 active:scale-[0.98]"
             >
               Visit the live site
               <ArrowUpRight className="size-3.5" strokeWidth={1.5} />

@@ -29,12 +29,12 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
         <TagRow items={project.stack} className="mt-7" />
 
         {(project.links.length > 0 || project.store) && (
-          <div className="mt-7 flex flex-wrap gap-6">
+          <div className="mt-8 flex flex-wrap gap-3">
             {project.store && (
               <StoreLink
                 android={project.store.android}
                 ios={project.store.ios}
-                className="inline-flex items-center gap-1 border-b border-fg-dim pb-0.5 text-sm text-fg transition-colors hover:border-fg hover:text-hover"
+                className="inline-flex h-10 items-center gap-2 rounded-full bg-fg px-4 text-sm font-medium text-bg transition-[background-color,transform,opacity] duration-200 ease-out hover:bg-fg/85 active:scale-[0.98]"
               />
             )}
             {project.links.map((l) => (
@@ -43,7 +43,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 border-b border-fg-dim pb-0.5 text-sm text-fg transition-colors hover:border-fg hover:text-hover"
+                className="inline-flex h-10 items-center gap-2 rounded-full bg-fg px-4 text-sm font-medium text-bg transition-[background-color,transform,opacity] duration-200 ease-out hover:bg-fg/85 active:scale-[0.98]"
               >
                 {l.label}
                 <ArrowUpRight
