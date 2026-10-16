@@ -23,7 +23,7 @@ export function ProjectVisual({ kind }: { kind: Project["visual"] }) {
   }
 }
 
-const frame = "relative h-full w-full overflow-hidden rounded-md border border-border bg-bg";
+const frame = "relative h-full w-full overflow-hidden rounded-2xl border-[1.5px] border-fg-muted/60 bg-bg";
 
 function AssistantVisual() {
   // MySA: a tall phone handled by the assistant, with feature labels either side.

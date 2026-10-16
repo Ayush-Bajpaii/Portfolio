@@ -11,7 +11,7 @@ export function WebsiteVisual() {
     { y: 170, label: "Clarity", sub: "session replay" },
   ];
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-md border border-border bg-bg" aria-hidden="true">
+    <div className="relative h-full w-full overflow-hidden rounded-2xl border-[1.5px] border-fg-muted/60 bg-bg" aria-hidden="true">
       <svg viewBox="0 0 344 300" preserveAspectRatio="xMidYMid meet" className="h-full w-full">
         <defs>
           <marker id="arr2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
