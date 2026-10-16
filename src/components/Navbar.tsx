@@ -89,7 +89,7 @@ export function Navbar() {
             href="#contact"
             className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-fg-muted transition-colors hover:text-hover sm:inline-flex"
           >
-            Let&apos;s Talk
+            Let&apos;s Connect
             <span aria-hidden="true" className="ml-1.5">
               ↗
             </span>
@@ -134,7 +134,7 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 className="py-4 font-mono text-[12px] uppercase tracking-[0.18em] text-fg"
               >
-                Let&apos;s Talk ↗
+                Let&apos;s Connect ↗
               </Link>
             </Container>
           </motion.nav>

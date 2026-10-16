@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Mail, Phone } from "lucide-react";
 import { experience, siteConfig } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -8,6 +8,9 @@ import { HeroPhoto } from "./HeroPhoto";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 
 const current = experience[0];
+
+/** Strip protocol, www and trailing slash for a readable tooltip. */
+const pretty = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 
 const meta = [
   { label: "Now", value: `${current.role}, ${current.company}` },
@@ -29,19 +32,26 @@ export function Hero() {
             <HeroPhoto />
             <ul className="flex items-center gap-3">
               {[
-                { label: "GitHub", href: siteConfig.social.github, Icon: GithubIcon },
-                { label: "LinkedIn", href: siteConfig.social.linkedin, Icon: LinkedinIcon },
-              ].map(({ label, href, Icon }) => (
-                <li key={label}>
+                { label: "GitHub", href: siteConfig.social.github, Icon: GithubIcon, show: pretty(siteConfig.social.github) },
+                { label: "LinkedIn", href: siteConfig.social.linkedin, Icon: LinkedinIcon, show: pretty(siteConfig.social.linkedin) },
+                { label: `Email ${siteConfig.email}`, href: `mailto:${siteConfig.email}`, Icon: Mail, show: siteConfig.email },
+                { label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone.replace(/\s+/g, "")}`, Icon: Phone, show: siteConfig.phone },
+              ].map(({ label, href, Icon, show }) => (
+                <li key={label} className="group relative">
                   <a
                     href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     aria-label={label}
                     className="grid size-11 place-items-center rounded-full border border-border text-fg transition-colors hover:border-fg-muted hover:text-hover"
                   >
-                    <Icon className="size-5" />
+                    <Icon className="size-5" strokeWidth={1.6} />
                   </a>
+                  <span
+                    role="tooltip"
+                    className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-bg-2 px-2.5 py-1 font-mono text-[11px] text-fg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
+                  >
+                    {show}
+                  </span>
                 </li>
               ))}
             </ul>

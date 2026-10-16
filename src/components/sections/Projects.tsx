@@ -10,8 +10,8 @@ export function Projects() {
       <Container>
         <Reveal>
           <SectionHeading
-            eyebrow="Selected projects"
-            title="Work I'm proud of"
+            eyebrow="Projects"
+            title="Projects & Contributions"
             description="Production mobile apps, native integrations, and full-stack systems. Each one shipped to real users."
           />
         </Reveal>
