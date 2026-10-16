@@ -18,10 +18,10 @@ export const siteConfig = {
   phone: "+91 6394484961",
   url: "https://ayushbajpai.dev", // update once deployed
   social: {
-    github: "https://github.com/", // TODO: add your GitHub username
-    linkedin: "https://www.linkedin.com/in/", // TODO: add your LinkedIn slug
-    leetcode: "https://leetcode.com/", // TODO: add your LeetCode username
-    geeksforgeeks: "https://www.geeksforgeeks.org/", // TODO: add your GfG profile
+    github: "https://github.com/Ayush-Bajpaii",
+    linkedin: "https://www.linkedin.com/in/ayushbajpaiab/",
+    leetcode: "https://leetcode.com/u/ayush-bajpaii/",
+    geeksforgeeks: "https://www.geeksforgeeks.org/user/bajpaiaayushh/",
   },
 };
 
@@ -105,6 +105,11 @@ export type Project = {
   challenge: string;
   stack: string[];
   links: { label: string; href: string }[]; // leave empty if not available
+  // Optional app-store links. Apple devices get the App Store link, everything else gets Google Play.
+  store?: {
+    android: { label: string; href: string };
+    ios: { label: string; href: string };
+  };
   visual: "assistant" | "native" | "payments" | "game" | "blog" | "apartment" | "web";
   featured?: boolean;
 };
@@ -120,7 +125,17 @@ export const projects: Project[] = [
     challenge:
       "Keeping a 33+ module codebase coherent: Clean Architecture with Riverpod for state, strict layer boundaries, and Remote Config driven rollouts so features can ship and be switched safely. Native call and notification handling had to stay reliable across Android versions and OEM battery policies.",
     stack: ["Flutter", "Dart", "Kotlin", "Riverpod", "Clean Architecture", "Drift", "Firebase", "Play Billing", "19+ locales"],
-    links: [{ label: "Visit mysmartassistant.ai", href: "https://mysmartassistant.ai/" }],
+    links: [],
+    store: {
+      android: {
+        label: "Get it on Google Play",
+        href: "https://play.google.com/store/apps/details?id=ai.mysmartassistant.mysa&hl=en_IN",
+      },
+      ios: {
+        label: "Download on the App Store",
+        href: "https://apps.apple.com/us/app/mysa-my-smart-ai-assistant/id6758428745",
+      },
+    },
     visual: "assistant",
     featured: true,
   },
@@ -169,7 +184,7 @@ export const projects: Project[] = [
     challenge:
       "Secure, low-friction onboarding: OTP email verification through Nodemailer alongside Google OAuth, with image uploads served from AWS S3.",
     stack: ["React", "Node.js", "Express", "MongoDB", "Firebase", "AWS S3"],
-    links: [{ label: "GitHub", href: "https://github.com/" }], // TODO: add repo URL
+    links: [{ label: "GitHub", href: "https://github.com/Ayush-Bajpaii/bloggingwebpage" }],
     visual: "blog",
   },
   {
@@ -181,7 +196,7 @@ export const projects: Project[] = [
     challenge:
       "Modelling Admin, Secretary, and Security roles with distinct workflows and permissions over shared records without duplicating business logic.",
     stack: ["Spring Boot", "MySQL", "Next.js", "Tailwind CSS"],
-    links: [{ label: "GitHub", href: "https://github.com/" }], // TODO: add repo URL
+    links: [{ label: "GitHub", href: "https://github.com/Ayush-Bajpaii/Appartment_management_System" }],
     visual: "apartment",
   },
 ];

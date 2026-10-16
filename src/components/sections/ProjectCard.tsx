@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/content/site";
 import { TagRow } from "@/components/ui/Tag";
 import { ProjectVisual } from "./ProjectVisual";
+import { StoreLink } from "@/components/ui/StoreLink";
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
@@ -27,8 +28,15 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
 
         <TagRow items={project.stack} className="mt-7" />
 
-        {project.links.length > 0 && (
+        {(project.links.length > 0 || project.store) && (
           <div className="mt-7 flex flex-wrap gap-6">
+            {project.store && (
+              <StoreLink
+                android={project.store.android}
+                ios={project.store.ios}
+                className="inline-flex items-center gap-1 border-b border-fg-dim pb-0.5 text-sm text-fg transition-colors hover:border-fg hover:text-hover"
+              />
+            )}
             {project.links.map((l) => (
               <a
                 key={l.href + l.label}
