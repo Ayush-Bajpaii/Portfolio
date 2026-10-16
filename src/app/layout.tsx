@@ -8,7 +8,7 @@ const geistSans = GeistSans;
 const geistMono = GeistMono;
 
 const title = `${siteConfig.name} — ${siteConfig.role}`;
-const description = `${siteConfig.name} is a ${siteConfig.role.toLowerCase()} in ${siteConfig.location} building production Android apps with Flutter, Kotlin, and Java.`;
+const description = siteConfig.intro;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
-  colorScheme: "dark",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };

@@ -16,7 +16,7 @@ export const siteConfig = {
   availability: "Open to opportunities",
   email: "bajpaiayush12345@gmail.com",
   phone: "+91 6394484961",
-  url: "https://ayushbajpai.dev", // update once deployed
+  url: "https://ayushbajpaiportfolio.vercel.app",
   social: {
     github: "https://github.com/Ayush-Bajpaii",
     linkedin: "https://www.linkedin.com/in/ayushbajpaiab/",
