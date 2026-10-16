@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { navLinks, siteConfig } from "@/content/site";
@@ -55,10 +56,19 @@ export function Navbar() {
       <Container className="flex h-14 items-center justify-between">
         <Link
           href="#top"
-          className="font-mono text-[12px] uppercase tracking-[0.18em] text-fg transition-colors hover:text-hover"
+          className="group flex items-center gap-2.5 font-sans text-[12.5px] font-medium uppercase tracking-[0.12em] text-fg transition-colors hover:text-hover"
           aria-label={`${siteConfig.name}, back to top`}
         >
-          {siteConfig.name}
+          {siteConfig.photo && (
+            <Image
+              src={siteConfig.photo}
+              alt=""
+              width={28}
+              height={28}
+              className="size-7 rounded-full object-cover ring-1 ring-border transition-[box-shadow] duration-300 group-hover:ring-fg-muted"
+            />
+          )}
+          <span>{siteConfig.name}</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
@@ -68,7 +78,7 @@ export function Navbar() {
               href={link.href}
               aria-current={active === link.href ? "true" : undefined}
               className={cn(
-                "relative py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors duration-200",
+                "relative py-2 font-sans text-[12px] font-medium uppercase tracking-[0.12em] transition-colors duration-200",
                 active === link.href ? "text-fg" : "text-fg-dim hover:text-hover",
               )}
             >
@@ -87,7 +97,7 @@ export function Navbar() {
         <div className="flex items-center gap-5">
           <Link
             href="#contact"
-            className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-fg-muted transition-colors hover:text-hover sm:inline-flex"
+            className="hidden font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-muted transition-colors hover:text-hover sm:inline-flex"
           >
             Let&apos;s Connect
             <span aria-hidden="true" className="ml-1.5">
@@ -124,7 +134,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="border-b border-border py-4 font-mono text-[12px] uppercase tracking-[0.18em] text-fg-muted transition-colors last:border-b-0 hover:text-hover"
+                  className="border-b border-border py-4 font-sans text-[12.5px] font-medium uppercase tracking-[0.12em] text-fg-muted transition-colors last:border-b-0 hover:text-hover"
                 >
                   {link.label}
                 </Link>
@@ -132,7 +142,7 @@ export function Navbar() {
               <Link
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="py-4 font-mono text-[12px] uppercase tracking-[0.18em] text-fg"
+                className="py-4 font-sans text-[12.5px] font-medium uppercase tracking-[0.12em] text-fg"
               >
                 Let&apos;s Connect ↗
               </Link>

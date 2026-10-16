@@ -14,7 +14,7 @@ export function About() {
             <dl className="mt-10 border-t border-border">
               {education.map((e) => (
                 <div key={e.degree} className="grid grid-cols-[4rem_1fr] gap-4 border-b border-border py-4 text-sm">
-                  <dt className="font-mono text-fg-dim">{e.year}</dt>
+                  <dt className="font-sans text-[13px] font-medium text-fg-dim">{e.year}</dt>
                   <dd>
                     <p className="text-fg">{e.degree}</p>
                     <p className="text-fg-muted">
@@ -24,7 +24,7 @@ export function About() {
                 </div>
               ))}
               <div className="grid grid-cols-[4rem_1fr] gap-4 border-b border-border py-4 text-sm">
-                <dt className="font-mono text-fg-dim">DSA</dt>
+                <dt className="font-sans text-[13px] font-medium text-fg-dim">DSA</dt>
                 <dd className="flex flex-wrap gap-x-5 gap-y-1">
                   {codingProfiles.map((p) => (
                     <a

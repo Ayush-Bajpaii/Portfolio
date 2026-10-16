@@ -9,19 +9,19 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
     <article className="group grid gap-8 border-b border-border py-12 lg:grid-cols-[1fr_minmax(0,32rem)] lg:gap-14">
       <div className="min-w-0">
         <div className="flex items-baseline gap-4">
-          <span className="font-mono text-[11px] text-fg-dim">{String(index + 1).padStart(2, "0")}</span>
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-fg-dim">{project.category}</p>
+          <span className="font-sans text-[13px] font-medium text-fg-dim">{String(index + 1).padStart(2, "0")}</span>
+          <p className="font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-dim">{project.category}</p>
         </div>
         <h3 className="mt-4 text-2xl font-normal tracking-[-0.02em] text-fg sm:text-[1.75rem]">{project.name}</h3>
         <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-fg-muted">{project.description}</p>
 
         <dl className="mt-7 grid gap-6 sm:grid-cols-2">
           <div>
-            <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-fg-dim">Role</dt>
+            <dt className="font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-dim">Role</dt>
             <dd className="mt-2 text-sm leading-relaxed text-fg-muted">{project.role}</dd>
           </div>
           <div>
-            <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-fg-dim">Engineering challenge</dt>
+            <dt className="font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-dim">Engineering challenge</dt>
             <dd className="mt-2 text-sm leading-relaxed text-fg-muted">{project.challenge}</dd>
           </div>
         </dl>

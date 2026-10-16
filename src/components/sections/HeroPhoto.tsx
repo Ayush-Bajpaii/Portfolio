@@ -10,7 +10,7 @@ export function HeroPhoto() {
           <Image src={siteConfig.photo} alt={siteConfig.photoAlt} fill priority sizes="80px" className="object-cover" />
         </span>
       )}
-      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-fg-dim">
+      <p className="font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-dim">
         <span className="text-fg">{siteConfig.name}</span>
         <span className="mx-2.5 text-border">/</span>
         {siteConfig.role}

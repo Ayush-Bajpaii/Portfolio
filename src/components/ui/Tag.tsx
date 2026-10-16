@@ -1,19 +1,30 @@
 import { cn } from "@/lib/utils";
 
-/** Restrained technology label: plain mono text, no badge chrome. */
+/**
+ * Technology label rendered as a quiet chip.
+ * A translucent tint keeps it legible on both the white page and the
+ * light-gray section backgrounds, with a gentle darken on hover.
+ */
 export function Tag({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <span className={cn("font-mono text-[12px] text-fg-dim transition-colors", className)}>{children}</span>
+    <span
+      className={cn(
+        "inline-flex h-7 items-center rounded-full bg-fg/[0.05] px-3 font-sans text-[13px] font-medium text-fg-muted",
+        "transition-[background-color,color] duration-300 ease-out hover:bg-fg/[0.09] hover:text-fg",
+        className,
+      )}
+    >
+      {children}
+    </span>
   );
 }
 
-/** Lays out Tags in a row separated by thin dividers. */
+/** Lays out Tags as a wrapping row of chips. */
 export function TagRow({ items, className }: { items: string[]; className?: string }) {
   return (
-    <ul className={cn("flex flex-wrap items-center gap-y-1.5", className)}>
-      {items.map((item, i) => (
-        <li key={item} className="flex items-center">
-          {i > 0 && <span aria-hidden="true" className="mx-2.5 h-3 w-px bg-border" />}
+    <ul className={cn("flex flex-wrap items-center gap-2", className)}>
+      {items.map((item) => (
+        <li key={item}>
           <Tag>{item}</Tag>
         </li>
       ))}

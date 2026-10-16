@@ -48,7 +48,7 @@ export function Hero() {
                   </a>
                   <span
                     role="tooltip"
-                    className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-bg-2 px-2.5 py-1 font-mono text-[11px] text-fg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
+                    className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-bg-2 px-2.5 py-1 font-sans text-[12.5px] font-medium text-fg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
                   >
                     {show}
                   </span>
@@ -85,7 +85,7 @@ export function Hero() {
           <dl className="mt-10 grid gap-y-4 border-t border-border pt-6 sm:mt-12 sm:grid-cols-3 sm:gap-x-8">
             {meta.map((m) => (
               <div key={m.label} className="grid grid-cols-[4.5rem_1fr] gap-4 sm:block">
-                <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-fg-dim">{m.label}</dt>
+                <dt className="font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-dim">{m.label}</dt>
                 <dd className="text-sm text-fg-muted sm:mt-2">{m.value}</dd>
               </div>
             ))}

@@ -21,7 +21,7 @@ export function Experience() {
             <Reveal as="li" key={job.company} delay={0.06 * i} className="border-b border-border">
               <article className="grid gap-6 py-10 lg:grid-cols-[14rem_1fr] lg:gap-12">
                 <header>
-                  <p className="font-mono text-xs text-fg-dim">
+                  <p className="font-sans text-[13px] text-fg-dim">
                     {job.start} — {job.end}
                   </p>
                   <h3 className="mt-2 text-lg font-medium tracking-tight text-fg">{job.company}</h3>
@@ -34,7 +34,7 @@ export function Experience() {
                   <ul className="space-y-3">
                     {job.points.map((pt) => (
                       <li key={pt} className="flex gap-3 text-[15px] leading-relaxed text-fg-muted">
-                        <span className="mt-[0.8em] h-px w-3 shrink-0 bg-fg-dim" />
+                        <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-fg/25" />
                         <span>{pt}</span>
                       </li>
                     ))}

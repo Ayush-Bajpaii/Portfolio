@@ -33,7 +33,7 @@ export function Footer() {
             </li>
           ))}
         </ul>
-        <p className="font-mono text-xs text-fg-dim">
+        <p className="font-sans text-[13px] text-fg-dim">
           © <Year /> {siteConfig.name}
         </p>
       </Container>

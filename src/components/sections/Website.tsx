@@ -12,7 +12,7 @@ export function Website() {
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
             <div className="max-w-2xl">
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-dim">{website.eyebrow}</p>
+              <p className="font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-dim">{website.eyebrow}</p>
               <h2 className="mt-4 text-3xl font-normal tracking-[-0.02em] text-fg sm:text-4xl">{website.name}</h2>
               <p className="mt-4 text-base leading-relaxed text-fg-muted sm:text-lg">{website.tagline}</p>
             </div>
@@ -33,7 +33,7 @@ export function Website() {
             <Reveal delay={0.05}>
               <p className="text-[15px] leading-relaxed text-fg-muted">{website.description}</p>
               <dl className="mt-8">
-                <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-fg-dim">Role</dt>
+                <dt className="font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-dim">Role</dt>
                 <dd className="mt-2 text-sm leading-relaxed text-fg-muted">{website.role}</dd>
               </dl>
             </Reveal>
