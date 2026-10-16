@@ -7,7 +7,7 @@ export const siteConfig = {
   eyebrow: "Android & Software Engineer",
   headline: "Developing scalable mobile experiences using Flutter and Native Android technologies.",
   intro:
-    "I build production-ready mobile applications using Flutter and Native Android, combining clean architecture, native integrations, reliable APIs, and thoughtful user experiences.",
+    "I work on building and improving mobile applications using Flutter and Native Android. From integrating APIs and payment systems to implementing native Android features and fixing production issues, I focus on making apps reliable, maintainable, and ready for real-world use.",
   location: "Gurugram, India",
   // Hero image. Place the file in /public/images and reference it from "/images/...".
   // Set to "" to show the code panel instead.

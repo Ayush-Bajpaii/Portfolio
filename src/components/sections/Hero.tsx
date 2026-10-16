@@ -24,8 +24,8 @@ export function Hero() {
   const tail = rest.length ? `using ${rest.join(" using ")}` : "";
 
   return (
-    <section id="top" className="relative pt-24 pb-14 sm:pt-28 sm:pb-16">
-      <Container>
+    <section id="top" className="relative flex min-h-svh flex-col pt-24 pb-10 sm:pt-26 sm:pb-12">
+      <Container className="flex flex-1 flex-col">
         {/* Status row */}
         <Reveal>
           <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 border-b border-border pb-6">
@@ -58,20 +58,17 @@ export function Hero() {
           </div>
         </Reveal>
 
-        {/* Eyebrow + display headline */}
-        <Reveal delay={0.05}>
-          <p className="mt-12 font-mono text-[11px] uppercase tracking-[0.2em] text-fg-dim sm:mt-16">{siteConfig.eyebrow}</p>
-        </Reveal>
+        {/* Display headline */}
         <AnimatedHeadline
           lead={lead}
           tail={tail}
-          className="mt-5 max-w-[22ch] text-[clamp(2.25rem,4.6vw,4rem)] font-light leading-[1.06] tracking-[-0.03em] text-fg"
+          className="mt-10 max-w-[22ch] text-[clamp(2.1rem,4vw,3.5rem)] font-light leading-[1.06] tracking-[-0.03em] text-fg sm:mt-12"
         />
 
         {/* Intro + actions */}
         <Reveal delay={0.12}>
-          <p className="mt-8 max-w-2xl text-base leading-relaxed text-fg-muted sm:text-lg">{siteConfig.intro}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-fg-muted sm:text-lg">{siteConfig.intro}</p>
+          <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3">
               <Button href="#projects" variant="link">
                 View Projects
                 <ArrowDown className="size-3.5" strokeWidth={1.5} />
@@ -84,8 +81,8 @@ export function Hero() {
         </Reveal>
 
         {/* Ruled meta strip */}
-        <Reveal delay={0.18}>
-          <dl className="mt-16 grid gap-y-4 border-t border-border pt-6 sm:mt-20 sm:grid-cols-3 sm:gap-x-8">
+        <Reveal delay={0.18} className="mt-auto">
+          <dl className="mt-10 grid gap-y-4 border-t border-border pt-6 sm:mt-12 sm:grid-cols-3 sm:gap-x-8">
             {meta.map((m) => (
               <div key={m.label} className="grid grid-cols-[4.5rem_1fr] gap-4 sm:block">
                 <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-fg-dim">{m.label}</dt>
