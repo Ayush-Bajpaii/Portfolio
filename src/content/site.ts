@@ -5,7 +5,7 @@ export const siteConfig = {
   shortName: "AB",
   role: "Mobile Application Developer",
   eyebrow: "Android & Software Engineer",
-  headline: "Building mobile experiences that work beautifully in the real world.",
+  headline: "Developing scalable mobile experiences using Flutter and Native Android technologies.",
   intro:
     "I build production-ready mobile applications using Flutter and Native Android, combining clean architecture, native integrations, reliable APIs, and thoughtful user experiences.",
   location: "Gurugram, India",

@@ -20,8 +20,8 @@ const meta = [
 
 export function Hero() {
   // Split the headline so the second clause can be set in a quieter tone.
-  const [lead, ...rest] = siteConfig.headline.split(" that ");
-  const tail = rest.length ? `that ${rest.join(" that ")}` : "";
+  const [lead, ...rest] = siteConfig.headline.split(" using ");
+  const tail = rest.length ? `using ${rest.join(" using ")}` : "";
 
   return (
     <section id="top" className="relative pt-24 pb-14 sm:pt-28 sm:pb-16">
