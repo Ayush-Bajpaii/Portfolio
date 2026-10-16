@@ -26,10 +26,10 @@ export const siteConfig = {
 };
 
 export const navLinks = [
-  { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
+  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -204,6 +204,47 @@ export const codingProfiles = [
   { label: "LeetCode", value: "600+ problems", href: siteConfig.social.leetcode },
   { label: "GeeksforGeeks", value: "312+ problems", href: siteConfig.social.geeksforgeeks },
 ];
+
+// Dedicated case study for the company marketing website.
+export const website = {
+  eyebrow: "Company website",
+  name: "mysmartassistant.ai",
+  url: "https://mysmartassistant.ai/",
+  tagline: "Marketing site for MySA, the AI assistant for calls, reminders, and documents.",
+  description:
+    "Designed and built the public website for MySA from scratch in hand-written HTML, CSS, and JavaScript. No framework overhead, so pages stay light and load fast on mobile networks. The site carries the full growth stack: search and answer-engine optimisation, ad attribution, session analytics, and Razorpay checkout.",
+  role: "Sole developer. Front end, performance, SEO/AEO, analytics and attribution wiring, payment integration, and deployment.",
+  capabilities: [
+    {
+      title: "Performance",
+      body: "Static HTML with critical CSS inlined, deferred scripts, compressed assets, and lazy-loaded media for a fast first paint and smooth scrolling.",
+    },
+    {
+      title: "SEO & AEO",
+      body: "Semantic structure, structured data, Open Graph and canonical tags, and answer-engine friendly content so AI assistants and search engines can read and cite the site. Supports agentic browsing.",
+    },
+    {
+      title: "Analytics & attribution",
+      body: "Google Tag Manager as the single tag layer, feeding Google Analytics, the Meta Pixel and Conversions API, and Microsoft Clarity. UTM parameters captured and persisted for campaign reporting.",
+    },
+    {
+      title: "Payments & integrations",
+      body: "Razorpay checkout for plans, plus third-party SDKs loaded on demand so they never block rendering.",
+    },
+  ],
+  stack: [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Google Tag Manager",
+    "Google Analytics",
+    "Meta Pixel",
+    "Microsoft Clarity",
+    "Razorpay",
+    "UTM tracking",
+    "Structured data",
+  ],
+};
 
 export const contact = {
   heading: "Have a product to build or an engineering problem to solve?",

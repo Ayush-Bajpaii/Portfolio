@@ -72,3 +72,201 @@ body {
 .text-balance {
   text-wrap: balance;
 }
+
+/* ---------- Project diagram animations (ambient, looped, reduced-motion aware) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Dashed line flow along a path */
+  .viz-flow {
+    animation: viz-flow 0.9s linear infinite;
+  }
+  .viz-flow-rev {
+    animation: viz-flow 0.9s linear infinite reverse;
+  }
+  @keyframes viz-flow {
+    to {
+      stroke-dashoffset: -14;
+    }
+  }
+
+  /* Expanding ring, e.g. live status */
+  .viz-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: viz-ring 1.8s ease-out infinite;
+  }
+  @keyframes viz-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+    100% {
+      transform: scale(3.2);
+      opacity: 0;
+    }
+  }
+
+  /* Soft opacity pulse */
+  .viz-pulse {
+    animation: viz-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes viz-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.15;
+    }
+  }
+
+  /* Progress bar draining left to right, loops */
+  .viz-progress {
+    transform-box: fill-box;
+    transform-origin: left center;
+    animation: viz-progress 6s linear infinite;
+  }
+  @keyframes viz-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Gentle vertical float */
+  .viz-float {
+    transform-box: fill-box;
+    animation: viz-float 4s ease-in-out infinite;
+  }
+  .viz-float-late {
+    transform-box: fill-box;
+    animation: viz-float 4s ease-in-out 1.2s infinite;
+  }
+  @keyframes viz-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  /* Sequential fill for OTP boxes */
+  .viz-step {
+    animation: viz-step 3s steps(1, end) infinite;
+    animation-delay: calc(var(--i, 0) * 0.35s);
+  }
+  @keyframes viz-step {
+    0%,
+    10% {
+      opacity: 0;
+    }
+    11%,
+    80% {
+      opacity: 1;
+    }
+    81%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Tile claim: alternates between two states */
+  .viz-claim {
+    animation: viz-claim 3.2s ease-in-out infinite;
+  }
+  @keyframes viz-claim {
+    0%,
+    40% {
+      opacity: 0;
+    }
+    50%,
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Blinking caret */
+  .viz-blink {
+    animation: viz-blink 1.1s steps(1, end) infinite;
+  }
+  @keyframes viz-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Slow drift for the hero-like skyline */
+  .viz-shimmer {
+    animation: viz-shimmer 2.4s ease-in-out infinite;
+  }
+  @keyframes viz-shimmer {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* Staged conversation: four groups enter in order, then the loop resets */
+  .viz-seq-1 {
+    transform-box: fill-box;
+    animation: viz-seq-1 7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+  .viz-seq-2 {
+    transform-box: fill-box;
+    animation: viz-seq-2 7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+  .viz-seq-3 {
+    transform-box: fill-box;
+    animation: viz-seq-3 7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+  .viz-seq-4 {
+    transform-box: fill-box;
+    animation: viz-seq-4 7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+  .viz-seq-5 {
+    transform-box: fill-box;
+    animation: viz-seq-5 7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+  /* Faster variant of the staged sequence */
+  .viz-fast .viz-seq-1,
+  .viz-fast .viz-seq-2,
+  .viz-fast .viz-seq-3,
+  .viz-fast .viz-seq-4,
+  .viz-fast .viz-seq-5 {
+    animation-duration: 4.5s;
+  }
+  @keyframes viz-seq-1 {
+    0%, 4% { opacity: 0; transform: translateY(6px); }
+    11%, 90% { opacity: 1; transform: translateY(0); }
+    96%, 100% { opacity: 0; transform: translateY(0); }
+  }
+  @keyframes viz-seq-2 {
+    0%, 24% { opacity: 0; transform: translateY(6px); }
+    31%, 90% { opacity: 1; transform: translateY(0); }
+    96%, 100% { opacity: 0; transform: translateY(0); }
+  }
+  @keyframes viz-seq-3 {
+    0%, 44% { opacity: 0; transform: translateY(6px); }
+    51%, 90% { opacity: 1; transform: translateY(0); }
+    96%, 100% { opacity: 0; transform: translateY(0); }
+  }
+  @keyframes viz-seq-4 {
+    0%, 64% { opacity: 0; transform: translateY(6px); }
+    71%, 90% { opacity: 1; transform: translateY(0); }
+    96%, 100% { opacity: 0; transform: translateY(0); }
+  }
+  @keyframes viz-seq-5 {
+    0%, 78% { opacity: 0; transform: translateY(6px); }
+    85%, 90% { opacity: 1; transform: translateY(0); }
+    96%, 100% { opacity: 0; transform: translateY(0); }
+  }
+}

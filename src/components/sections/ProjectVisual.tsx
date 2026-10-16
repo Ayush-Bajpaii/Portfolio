@@ -35,42 +35,52 @@ function AssistantVisual() {
         <rect x="140" y="22" width="40" height="5" rx="2.5" fill="var(--border)" />
 
         {/* Call assist card */}
+        <g className="viz-seq-1">
         <rect x="106" y="38" width="108" height="54" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <circle className="viz-ring" cx="122" cy="56" r="8" fill="none" stroke="var(--fg-muted)" />
         <circle cx="122" cy="56" r="8" fill="var(--bg)" stroke="var(--fg-muted)" />
         <path d="M119 53.5 l2 2 l4 -4" stroke="var(--fg)" strokeWidth="1.2" fill="none" />
-        <text x="136" y="54" fontSize="7" fontFamily="var(--font-mono)" fill="var(--fg)">
+        <text x="136" y="54" fontSize="6.4" fontFamily="var(--font-mono)" fill="var(--fg)">
           Incoming call
         </text>
-        <text x="136" y="63" fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
+        <text x="136" y="63" fontSize="5.9" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
           Unknown · +91 98…
         </text>
         <rect x="112" y="72" width="46" height="13" rx="2" fill="var(--fg)" />
-        <text x="135" y="81" textAnchor="middle" fontSize="6" fontFamily="var(--font-mono)" fill="var(--bg)">
+        <text x="135" y="81" textAnchor="middle" fontSize="5.5" fontFamily="var(--font-mono)" fill="var(--bg)">
           MySA answers
         </text>
         <rect x="162" y="72" width="46" height="13" rx="2" fill="var(--bg)" stroke="var(--border)" />
-        <text x="185" y="81" textAnchor="middle" fontSize="6" fontFamily="var(--font-mono)" fill="var(--fg-muted)">
+        <text x="185" y="81" textAnchor="middle" fontSize="5.5" fontFamily="var(--font-mono)" fill="var(--fg-muted)">
           Take it
         </text>
+        </g>
 
         {/* Chat */}
-        <rect x="134" y="102" width="80" height="18" rx="4" fill="var(--card)" stroke="var(--border)" />
-        <text x="140" y="113.5" fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--fg-muted)">
-          what did they want?
-        </text>
+        <g className="viz-seq-2">
+        <g className="viz-float">
+          <rect x="134" y="102" width="80" height="18" rx="4" fill="var(--card)" stroke="var(--border)" />
+          <text x="140" y="113.5" fontSize="5.9" fontFamily="var(--font-mono)" fill="var(--fg-muted)">
+            what did they want?
+          </text>
+        </g>
+        </g>
+        <g className="viz-seq-3">
         <rect x="106" y="126" width="108" height="40" rx="4" fill="var(--bg)" stroke="var(--fg-dim)" />
-        <text x="112" y="138" fontSize="6.2" fontFamily="var(--font-mono)" fill="var(--fg)">
+        <text x="112" y="138" fontSize="5.7" fontFamily="var(--font-mono)" fill="var(--fg)">
           Delivery query, order
         </text>
-        <text x="112" y="148" fontSize="6.2" fontFamily="var(--font-mono)" fill="var(--fg)">
+        <text x="112" y="148" fontSize="5.7" fontFamily="var(--font-mono)" fill="var(--fg)">
           #4821. Slot confirmed,
         </text>
-        <text x="112" y="158" fontSize="6.2" fontFamily="var(--font-mono)" fill="var(--fg)">
+        <text x="112" y="158" fontSize="5.7" fontFamily="var(--font-mono)" fill="var(--fg)">
           reminder set for 18:00.
         </text>
+        </g>
 
         {/* Reminders */}
-        <text x="106" y="182" fontSize="6" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
+        <g className="viz-seq-4">
+        <text x="106" y="182" fontSize="5.5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
           TODAY
         </text>
         {[
@@ -79,15 +89,16 @@ function AssistantVisual() {
         ].map((r, i) => (
           <g key={r.t}>
             <rect x="106" y={188 + i * 20} width="108" height="16" rx="3" fill="var(--card)" stroke="var(--border)" />
-            <circle cx="114" cy={196 + i * 20} r="2" fill={i === 0 ? "var(--fg)" : "var(--fg-dim)"} />
-            <text x="120" y={195 + i * 20} fontSize="6" fontFamily="var(--font-mono)" fill="var(--fg)">
+            <circle className={i === 0 ? "viz-pulse" : undefined} cx="114" cy={196 + i * 20} r="2" fill={i === 0 ? "var(--fg)" : "var(--fg-dim)"} />
+            <text x="120" y={195 + i * 20} fontSize="5.5" fontFamily="var(--font-mono)" fill="var(--fg)">
               {r.t}
             </text>
-            <text x="120" y={201.5 + i * 20} fontSize="5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
+            <text x="120" y={201.5 + i * 20} fontSize="4.6" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
               {r.s}
             </text>
           </g>
         ))}
+        </g>
 
         {/* Side labels */}
         {[
@@ -119,42 +130,140 @@ function AssistantVisual() {
   );
 }
 
+type Tok = { t: string; c?: "kw" | "ty" | "fn" | "str" | "cm" };
+const tokTone: Record<NonNullable<Tok["c"]>, string> = {
+  kw: "var(--fg-muted)",
+  ty: "var(--fg)",
+  fn: "var(--fg)",
+  str: "var(--fg-muted)",
+  cm: "var(--fg-dim)",
+};
+
+function CodePanel({
+  x,
+  y,
+  w,
+  title,
+  lang,
+  lines,
+}: {
+  x: number;
+  y: number;
+  w: number;
+  title: string;
+  lang: string;
+  lines: Tok[][];
+}) {
+  const mono = "var(--font-mono)";
+  const lineH = 10.5;
+  const h = 18 + lines.length * lineH + 4;
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx="5" fill="var(--bg-2)" stroke="var(--border)" />
+      <rect x={x} y={y} width={w} height="15" rx="5" fill="var(--card)" />
+      <rect x={x} y={y + 14} width={w} height="1" fill="var(--border)" />
+      <text x={x + 9} y={y + 10} fontSize="6" fontFamily={mono} fill="var(--fg-muted)">
+        {title}
+      </text>
+      <text x={x + w - 9} y={y + 10} textAnchor="end" fontSize="5" fontFamily={mono} fill="var(--fg-dim)">
+        {lang}
+      </text>
+      {lines.map((line, i) => (
+        <text key={i} x={x + 9} y={y + 28 + i * lineH} fontSize="6.4" fontFamily={mono} xmlSpace="preserve">
+          {line.map((tk, j) => (
+            <tspan key={j} fill={tk.c ? tokTone[tk.c] : "var(--fg-muted)"}>
+              {tk.t}
+            </tspan>
+          ))}
+        </text>
+      ))}
+    </g>
+  );
+}
+
 function NativeVisual() {
+  // Dart on top, Kotlin below, joined by the MethodChannel / EventChannel bridge.
+  const dart: Tok[][] = [
+    [{ t: "// call_bridge.dart", c: "cm" }],
+    [{ t: "const", c: "kw" }, { t: " _ch = " }, { t: "MethodChannel", c: "ty" }, { t: "(" }, { t: "'aivo/calls'", c: "str" }, { t: ");" }],
+    [{ t: "Future", c: "ty" }, { t: "<" }, { t: "void", c: "kw" }, { t: "> " }, { t: "start", c: "fn" }, { t: "() => _ch." }, { t: "invokeMethod", c: "fn" }, { t: "(" }, { t: "'start'", c: "str" }, { t: ");" }],
+    [{ t: "Stream", c: "ty" }, { t: "<" }, { t: "CallEvent", c: "ty" }, { t: "> " }, { t: "events", c: "fn" }, { t: "() => _events" }],
+    [{ t: "    ." }, { t: "receiveBroadcastStream", c: "fn" }, { t: "()." }, { t: "map", c: "fn" }, { t: "(" }, { t: "CallEvent", c: "ty" }, { t: ".fromJson);" }],
+  ];
+  const kotlin: Tok[][] = [
+    [{ t: "// CallBridge.kt", c: "cm" }],
+    [{ t: "class", c: "kw" }, { t: " " }, { t: "CallBridge", c: "ty" }, { t: " : " }, { t: "MethodCallHandler", c: "ty" }, { t: " {" }],
+    [{ t: "  " }, { t: "override fun", c: "kw" }, { t: " " }, { t: "onMethodCall", c: "fn" }, { t: "(call: " }, { t: "MethodCall", c: "ty" }, { t: ", result: " }, { t: "Result", c: "ty" }, { t: ") =" }],
+    [{ t: "    " }, { t: "when", c: "kw" }, { t: " (call.method) {" }],
+    [{ t: "      " }, { t: "\"start\"", c: "str" }, { t: " -> " }, { t: "startService", c: "fn" }, { t: "(result)" }],
+    [{ t: "      " }, { t: "\"stop\"", c: "str" }, { t: "  -> " }, { t: "stopService", c: "fn" }, { t: "(result)" }],
+    [{ t: "      " }, { t: "else", c: "kw" }, { t: "    -> result." }, { t: "notImplemented", c: "fn" }, { t: "()" }],
+    [{ t: "    }" }],
+    [{ t: "}" }],
+  ];
+  const mono = "var(--font-mono)";
   return (
     <div className={frame} aria-hidden="true">
-      <svg viewBox="0 0 320 200" className="h-full w-full">
+      <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" className="h-full w-full">
         <defs>
           <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
             <path d="M0,0 L6,3 L0,6 z" fill="var(--fg-muted)" />
           </marker>
         </defs>
-        <rect x="24" y="44" width="100" height="112" rx="8" fill="var(--card)" stroke="var(--border)" />
-        <text x="74" y="70" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fill="var(--accent-2)">
-          Dart
-        </text>
-        <rect x="40" y="86" width="68" height="8" rx="2" fill="var(--border)" />
-        <rect x="40" y="102" width="52" height="8" rx="2" fill="var(--border)" />
-        <rect x="40" y="118" width="60" height="8" rx="2" fill="var(--border)" />
 
-        <rect x="196" y="44" width="100" height="112" rx="8" fill="var(--card)" stroke="var(--border)" />
-        <text x="246" y="70" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fill="var(--accent)">
-          Kotlin
-        </text>
-        <rect x="212" y="86" width="68" height="8" rx="2" fill="var(--border)" />
-        <rect x="212" y="102" width="44" height="8" rx="2" fill="var(--border)" />
-        <rect x="212" y="118" width="60" height="8" rx="2" fill="var(--border)" />
+        <CodePanel x={14} y={12} w={292} title="call_bridge.dart" lang="DART" lines={dart} />
 
-        <line x1="124" y1="88" x2="194" y2="88" stroke="var(--fg-muted)" strokeDasharray="3 4" markerEnd="url(#arr)" />
-        <line x1="196" y1="116" x2="126" y2="116" stroke="var(--fg-muted)" strokeDasharray="3 4" markerEnd="url(#arr)" />
-        <text x="160" y="78" textAnchor="middle" fontSize="9" fontFamily="var(--font-mono)" fill="var(--fg-muted)">
+        {/* Bridge row */}
+        {/* Riverpod chip */}
+        <rect x="14" y="110" width="96" height="30" rx="4" fill="var(--card)" stroke="var(--border)" />
+        <text x="22" y="123" fontSize="6" fontFamily={mono} fill="var(--fg)">
+          Riverpod provider
+        </text>
+        <text x="22" y="132" fontSize="4.8" fontFamily={mono} fill="var(--fg-dim)">
+          CallEvent stream → UI
+        </text>
+
+        {/* Channel */}
+        <rect x="124" y="118" width="72" height="14" rx="7" fill="var(--bg)" stroke="var(--border)" />
+        <text x="160" y="127.5" textAnchor="middle" fontSize="5.6" fontFamily={mono} fill="var(--fg)">
+          aivo/calls
+        </text>
+        {/* down: invokeMethod */}
+        <line className="viz-flow" x1="146" y1="88" x2="146" y2="116" stroke="var(--fg-muted)" strokeDasharray="3 4" markerEnd="url(#arr)" />
+        <line className="viz-flow" x1="146" y1="134" x2="146" y2="162" stroke="var(--fg-muted)" strokeDasharray="3 4" markerEnd="url(#arr)" />
+        <circle r="2" fill="var(--fg)">
+          <animateMotion dur="2.2s" repeatCount="indefinite" path="M146 88 L146 160" calcMode="spline" keySplines="0.4 0 0.2 1" keyTimes="0;1" />
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="2.2s" repeatCount="indefinite" />
+        </circle>
+        {/* up: EventChannel */}
+        <line className="viz-flow" x1="174" y1="162" x2="174" y2="134" stroke="var(--fg-muted)" strokeDasharray="3 4" markerEnd="url(#arr)" />
+        <line className="viz-flow" x1="174" y1="116" x2="174" y2="88" stroke="var(--fg-muted)" strokeDasharray="3 4" markerEnd="url(#arr)" />
+        <circle r="2" fill="var(--fg)">
+          <animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path="M174 162 L174 90" calcMode="spline" keySplines="0.4 0 0.2 1" keyTimes="0;1" />
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="2.2s" begin="1.1s" repeatCount="indefinite" />
+        </circle>
+        <text x="140" y="104" textAnchor="end" fontSize="4.8" fontFamily={mono} fill="var(--fg-dim)">
           invokeMethod
         </text>
-        <text x="160" y="132" textAnchor="middle" fontSize="9" fontFamily="var(--font-mono)" fill="var(--fg-muted)">
+        <text x="180" y="150" fontSize="4.8" fontFamily={mono} fill="var(--fg-dim)">
           EventChannel
         </text>
-        <rect x="112" y="166" width="96" height="18" rx="9" fill="var(--bg-2)" stroke="var(--border)" />
-        <text x="160" y="178" textAnchor="middle" fontSize="8.5" fontFamily="var(--font-mono)" fill="var(--fg-muted)">
+
+        {/* ForegroundService chip */}
+        <rect x="210" y="110" width="96" height="30" rx="4" fill="var(--card)" stroke="var(--border)" />
+        <circle className="viz-ring" cx="220" cy="125" r="2.2" fill="none" stroke="var(--fg-muted)" />
+        <circle cx="220" cy="125" r="2.2" fill="var(--fg)" />
+        <text x="226" y="123" fontSize="6" fontFamily={mono} fill="var(--fg)">
           ForegroundService
+        </text>
+        <text x="226" y="132" fontSize="4.8" fontFamily={mono} fill="var(--fg-dim)">
+          calls · notifications
+        </text>
+
+        <CodePanel x={14} y={164} w={292} title="CallBridge.kt" lang="KOTLIN" lines={kotlin} />
+
+        <text x="160" y="310" textAnchor="middle" fontSize="5" fontFamily={mono} fill="var(--fg-dim)">
+          Flutter UI  ·  typed Dart API  ·  Kotlin platform code
         </text>
       </svg>
     </div>
@@ -170,25 +279,28 @@ function PaymentsVisual() {
   ];
   return (
     <div className={frame} aria-hidden="true">
-      <div className="absolute inset-5 flex flex-col justify-between">
+      <div className="viz-fast absolute inset-5 flex flex-col justify-between">
         <div className="flex items-center justify-between font-mono text-[10px] text-fg-muted">
           <span>BillingClient</span>
           <span className="rounded border border-border px-1.5 py-0.5">v7</span>
         </div>
         <ul className="space-y-1.5">
-          {rows.map((r) => (
+          {rows.map((r, i) => (
             <li
               key={r.k}
-              className="flex items-center justify-between rounded border border-border bg-card px-2.5 py-1.5 font-mono text-[10px]"
+              className={`viz-seq-${i + 1} flex items-center justify-between rounded border border-border bg-card px-2.5 py-1.5 font-mono text-[10px]`}
             >
               <span className="text-fg-muted">{r.k}</span>
               <span className={r.s === "ok" ? "text-accent-2" : "text-fg"}>{r.v}</span>
             </li>
           ))}
         </ul>
-        <div className="flex items-center justify-between rounded-md border border-accent/40 bg-bg-2 px-3 py-2 font-mono text-[10px]">
+        <div className="viz-seq-5 flex items-center justify-between rounded-md border border-accent/40 bg-bg-2 px-3 py-2 font-mono text-[10px]">
           <span className="text-fg">Entitlement</span>
-          <span className="text-accent">active</span>
+          <span className="inline-flex items-center gap-1.5 text-accent">
+            <span className="viz-pulse size-1.5 rounded-full bg-fg" />
+            active
+          </span>
         </div>
       </div>
     </div>
@@ -217,7 +329,7 @@ function GameVisual() {
           60 FPS
         </text>
         <rect x="20" y="34" width="280" height="1" fill="var(--border)" />
-        <rect x="20" y="34" width="190" height="1" fill="var(--fg)" />
+        <rect className="viz-progress" x="20" y="34" width="280" height="1" fill="var(--fg)" />
 
         {/* Player one */}
         <circle cx="34" cy="64" r="10" fill="var(--bg-2)" stroke="var(--fg-muted)" />
@@ -264,8 +376,13 @@ function GameVisual() {
           }),
         )}
 
+        {/* Tiles being claimed */}
+        <rect className="viz-claim" x="128" y="90" width="32" height="24" rx="3" fill="var(--fg)" />
+        <rect className="viz-claim" style={{ animationDelay: "2.5s" }} x="204" y="180" width="32" height="24" rx="3" fill="var(--fg-dim)" />
+
         {/* Sync line */}
         <rect x="20" y="214" width="280" height="1" fill="var(--border)" />
+        <circle className="viz-ring" cx="26" cy="226" r="2" fill="none" stroke="var(--fg-muted)" />
         <circle cx="26" cy="226" r="2" fill="var(--fg)" />
         <text x="34" y="229" fontSize="8" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
           socket · state synced 18ms
@@ -296,8 +413,8 @@ function BlogVisual() {
         <rect x="48" y="80" width="54" height="5" rx="2" fill="var(--fg-dim)" />
         {/* Cover image from S3 */}
         <rect x="32" y="96" width="150" height="62" rx="3" fill="var(--card)" stroke="var(--border)" />
-        <path d="M44 148 L78 118 L102 140 L118 128 L170 148 Z" fill="var(--border)" />
-        <circle cx="150" cy="112" r="6" fill="var(--border)" />
+        <path className="viz-shimmer" d="M44 148 L78 118 L102 140 L118 128 L170 148 Z" fill="var(--border)" />
+        <circle className="viz-shimmer" style={{ animationDelay: "1.2s" }} cx="150" cy="112" r="6" fill="var(--border)" />
         <text x="36" y="154" fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
           s3://blog-media
         </text>
@@ -314,12 +431,21 @@ function BlogVisual() {
         <text x="213" y="88" fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
           email
         </text>
+        <rect className="viz-blink" x="233" y="81" width="1" height="8" fill="var(--fg-muted)" />
         {/* OTP boxes */}
         {[0, 1, 2, 3, 4, 5].map((i) => (
           <rect key={i} x={208 + i * 12.2} y="100" width="10" height="14" rx="2" fill="var(--bg)" stroke="var(--border)" />
         ))}
-        {[0, 1, 2, 3].map((i) => (
-          <circle key={i} cx={213 + i * 12.2} cy="107" r="1.5" fill="var(--fg)" />
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <circle
+            key={i}
+            className="viz-step"
+            style={{ "--i": i } as React.CSSProperties}
+            cx={213 + i * 12.2}
+            cy="107"
+            r="1.5"
+            fill="var(--fg)"
+          />
         ))}
         <text x="208" y="125" fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
           OTP sent · 00:58
@@ -382,6 +508,8 @@ function ApartmentVisual() {
         <text x="106" y="36" fontSize="8" fontFamily="var(--font-mono)" fill="var(--fg)">
           Entry / Exit log
         </text>
+        <circle className="viz-ring" cx="196" cy="33" r="2" fill="none" stroke="var(--fg-muted)" />
+        <circle className="viz-pulse" cx="196" cy="33" r="2" fill="var(--fg)" />
         <rect x="236" y="27" width="56" height="12" rx="2" fill="var(--fg)" />
         <text x="264" y="35.5" textAnchor="middle" fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--bg)">
           + New entry
@@ -413,7 +541,7 @@ function ApartmentVisual() {
         ))}
         <rect x="106" y="106" width="186" height="1" fill="var(--border)" />
         {rows.map((r, i) => (
-          <g key={r.name}>
+          <g key={r.name} className={`viz-seq-${i + 1}`}>
             <text x="108" y={120 + i * 20} fontSize="7" fontFamily="var(--font-mono)" fill="var(--fg)">
               {r.name}
             </text>

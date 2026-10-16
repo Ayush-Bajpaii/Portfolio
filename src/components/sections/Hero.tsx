@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeroPhoto } from "./HeroPhoto";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 
 const current = experience[0];
 
@@ -26,10 +27,24 @@ export function Hero() {
         <Reveal>
           <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 border-b border-border pb-6">
             <HeroPhoto />
-            <p className="inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-fg-dim">
-              <span className="size-1.5 rounded-full bg-fg" aria-hidden="true" />
-              {siteConfig.availability}
-            </p>
+            <ul className="flex items-center gap-3">
+              {[
+                { label: "GitHub", href: siteConfig.social.github, Icon: GithubIcon },
+                { label: "LinkedIn", href: siteConfig.social.linkedin, Icon: LinkedinIcon },
+              ].map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="grid size-11 place-items-center rounded-full border border-border text-fg transition-colors hover:border-fg-muted hover:text-hover"
+                  >
+                    <Icon className="size-5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </Reveal>
 
