@@ -5,7 +5,7 @@ import { ProjectVisual } from "./ProjectVisual";
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
-    <article className="group grid gap-8 border-b border-border py-12 lg:grid-cols-[1fr_minmax(0,22rem)] lg:gap-16">
+    <article className="group grid gap-8 border-b border-border py-12 lg:grid-cols-[1fr_minmax(0,32rem)] lg:gap-14">
       <div className="min-w-0">
         <div className="flex items-baseline gap-4">
           <span className="font-mono text-[11px] text-fg-dim">{String(index + 1).padStart(2, "0")}</span>
@@ -48,7 +48,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
         )}
       </div>
 
-      <div className="aspect-[16/10] min-w-0 lg:aspect-[4/3] lg:self-start">
+      <div className="aspect-[4/3] min-w-0 lg:aspect-auto lg:h-full lg:min-h-[26rem]">
         <ProjectVisual kind={project.visual} />
       </div>
     </article>

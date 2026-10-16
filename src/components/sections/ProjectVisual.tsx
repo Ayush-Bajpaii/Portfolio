@@ -26,10 +26,10 @@ export function ProjectVisual({ kind }: { kind: Project["visual"] }) {
 const frame = "relative h-full w-full overflow-hidden rounded-md border border-border bg-bg";
 
 function AssistantVisual() {
-  // MySA: an incoming call handled by the assistant, with reminders and a chat reply.
+  // MySA: a tall phone handled by the assistant, with feature labels either side.
   return (
     <div className={frame} aria-hidden="true">
-      <svg viewBox="0 0 320 240" className="h-full w-full">
+      <svg viewBox="38 8 244 232" preserveAspectRatio="xMidYMid meet" className="h-full w-full">
         {/* Phone */}
         <rect x="96" y="14" width="128" height="226" rx="14" fill="var(--bg-2)" stroke="var(--border)" />
         <rect x="140" y="22" width="40" height="5" rx="2.5" fill="var(--border)" />
@@ -93,11 +93,11 @@ function AssistantVisual() {
         {[
           { y: 60, t: "Call Assist" },
           { y: 140, t: "Ask MySA" },
-          { y: 196, t: "Smart Reminder" },
+          { y: 196, t: "Reminders" },
         ].map((l) => (
           <g key={l.t}>
-            <rect x="24" y={l.y - 1} width="64" height="1" fill="var(--border)" />
-            <text x="24" y={l.y - 5} fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
+            <rect x="44" y={l.y - 1} width="46" height="1" fill="var(--border)" />
+            <text x="44" y={l.y - 5} fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
               {l.t}
             </text>
           </g>
@@ -108,8 +108,8 @@ function AssistantVisual() {
           { y: 196, t: "Calendar" },
         ].map((l) => (
           <g key={l.t}>
-            <rect x="232" y={l.y - 1} width="64" height="1" fill="var(--border)" />
-            <text x="232" y={l.y - 5} fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
+            <rect x="230" y={l.y - 1} width="46" height="1" fill="var(--border)" />
+            <text x="230" y={l.y - 5} fontSize="6.5" fontFamily="var(--font-mono)" fill="var(--fg-dim)">
               {l.t}
             </text>
           </g>
