@@ -8,7 +8,7 @@ const geistSans = GeistSans;
 const geistMono = GeistMono;
 
 const title = `${siteConfig.name} — ${siteConfig.role}`;
-const description = siteConfig.intro;
+const description = siteConfig.summary;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -27,11 +27,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title,
     description,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: title }],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
+    images: ["/og.png"],
   },
   robots: { index: true, follow: true },
 };

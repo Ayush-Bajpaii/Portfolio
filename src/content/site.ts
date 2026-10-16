@@ -6,6 +6,8 @@ export const siteConfig = {
   role: "Mobile Application Developer",
   eyebrow: "Android & Software Engineer",
   headline: "Developing scalable mobile experiences using Flutter and Native Android technologies.",
+  // Short one-liner for link previews and search results.
+  summary: "Mobile Application Developer building Flutter and Native Android apps in Gurugram, India.",
   intro:
     "I work on building and improving mobile applications using Flutter and Native Android. From integrating APIs and payment systems to implementing native Android features and fixing production issues, I focus on making apps reliable, maintainable, and ready for real-world use.",
   location: "Gurugram, India",
