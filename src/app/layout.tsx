@@ -16,7 +16,6 @@ export const metadata: Metadata = {
     default: title,
     template: `%s — ${siteConfig.name}`,
   },
-  description,
   keywords: ["Android Developer", "Flutter", "Kotlin", "Java", "Mobile Developer", "Gurugram", siteConfig.name],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
@@ -26,13 +25,11 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: siteConfig.name,
     title,
-    description,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: title }],
   },
   twitter: {
     card: "summary_large_image",
     title,
-    description,
     images: ["/og.png"],
   },
   robots: { index: true, follow: true },
@@ -49,6 +46,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        {/* Search-engine description only. Kept out of `metadata` so share cards show just the title and image. */}
+        <meta name="description" content={description} />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-fg focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-bg"
