@@ -1,12 +1,13 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { FloatingCta } from "@/components/FloatingCta";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Experience } from "@/components/sections/Experience";
 import { Projects } from "@/components/sections/Projects";
 import { Website } from "@/components/sections/Website";
 import { Skills } from "@/components/sections/Skills";
-import { Contact } from "@/components/sections/Contact";
+import { Testimonials } from "@/components/sections/Testimonials";
 
 export default function Home() {
   return (
@@ -17,11 +18,12 @@ export default function Home() {
         <Experience />
         <Projects />
         <Website />
+        <Testimonials />
         <Skills />
         <About />
-        <Contact />
       </main>
       <Footer />
+      <FloatingCta />
     </>
   );
 }

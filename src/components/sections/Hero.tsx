@@ -1,11 +1,11 @@
-import { ArrowDown, ArrowUpRight, Mail, Phone } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { experience, siteConfig } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeroPhoto } from "./HeroPhoto";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon, MailFilledIcon, PhoneFilledIcon } from "@/components/ui/BrandIcons";
 
 const current = experience[0];
 
@@ -32,19 +32,20 @@ export function Hero() {
             <HeroPhoto />
             <ul className="flex items-center gap-3">
               {[
-                { label: "GitHub", href: siteConfig.social.github, Icon: GithubIcon, show: pretty(siteConfig.social.github) },
-                { label: "LinkedIn", href: siteConfig.social.linkedin, Icon: LinkedinIcon, show: pretty(siteConfig.social.linkedin) },
-                { label: `Email ${siteConfig.email}`, href: `mailto:${siteConfig.email}`, Icon: Mail, show: siteConfig.email },
-                { label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone.replace(/\s+/g, "")}`, Icon: Phone, show: siteConfig.phone },
-              ].map(({ label, href, Icon, show }) => (
+                { label: "GitHub", href: siteConfig.social.github, Icon: GithubIcon, show: pretty(siteConfig.social.github), color: "#181717" },
+                { label: "LinkedIn", href: siteConfig.social.linkedin, Icon: LinkedinIcon, show: pretty(siteConfig.social.linkedin), color: "#0A66C2" },
+                { label: `Email ${siteConfig.email}`, href: `mailto:${siteConfig.email}`, Icon: MailFilledIcon, show: siteConfig.email, color: "#FF4F5E" },
+                { label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone.replace(/\s+/g, "")}`, Icon: PhoneFilledIcon, show: siteConfig.phone, color: "#22C55E" },
+              ].map(({ label, href, Icon, show, color }) => (
                 <li key={label} className="group relative">
                   <a
                     href={href}
                     {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     aria-label={label}
-                    className="grid size-11 place-items-center rounded-full border border-border text-fg transition-colors hover:border-fg-muted hover:text-hover"
+                    className="grid size-11 place-items-center rounded-full border border-border bg-bg transition-[border-color,background-color] duration-200 hover:border-fg-muted hover:bg-bg-2"
+                    style={{ color }}
                   >
-                    <Icon className="size-5" strokeWidth={1.6} />
+                    <Icon className="size-5" />
                   </a>
                   <span
                     role="tooltip"
@@ -73,7 +74,7 @@ export function Hero() {
                 View Projects
                 <ArrowDown className="size-3.5" strokeWidth={1.5} />
               </Button>
-              <Button href="#contact" variant="link" className="border-transparent text-fg-muted">
+              <Button href="/contact" variant="link" className="border-transparent text-fg-muted">
                 Contact Me
                 <ArrowUpRight className="size-3.5" strokeWidth={1.5} />
               </Button>

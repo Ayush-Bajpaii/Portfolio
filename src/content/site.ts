@@ -31,8 +31,8 @@ export const navLinks = [
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
+  { label: "Testimonials", href: "#testimonials" },
   { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
 ];
 
 export const about = {
@@ -262,6 +262,48 @@ export const website = {
     "Structured data",
   ],
 };
+
+// Testimonials. Only entries with a non-empty `quote` are rendered.
+// Photos: save to public/images/testimonials/<file>.jpg and set `photo`; if omitted,
+// an initials avatar is shown instead.
+export type Testimonial = {
+  name: string;
+  role: string; // e.g. "Senior Android Engineer, AIVO Technologies"
+  relation: string; // e.g. "Worked together at AIVO" or "Managed Ayush at Witzeal"
+  linkedin: string;
+  photo?: string;
+  quote: string;
+};
+
+export const testimonials: Testimonial[] = [
+  {
+    name: "Ashwani Tyagi",
+    role: "UX/UI Designer · Product Design",
+    relation: "Colleague at AIVO Technologies",
+    linkedin: "https://www.linkedin.com/in/ashwani-tyagi3299/",
+    photo: "/images/testimonials/ashwani-tyagi.webp",
+    quote:
+      "Ayush collaborates effectively with the design team, understands UI/UX requirements, and translates design concepts into polished, user-friendly mobile experiences.",
+  },
+  {
+    name: "Akhilesh Yadav",
+    role: "Assistant Professor, P. P. Savani University",
+    relation: "Studied together at Tezpur University",
+    linkedin: "https://www.linkedin.com/in/akhileshyadavak2kb2/",
+    photo: "/images/testimonials/akhilesh-yadav.webp",
+    quote:
+      "Ayush approaches development with a focus on clean code, practical problem-solving, and maintainable solutions. He takes the time to understand requirements and build reliable software.",
+  },
+  {
+    name: "Ratnesh Singh",
+    role: "AI Software Engineer, MySmartAssistant.ai",
+    relation: "Colleague at AIVO Technologies and Witzeal",
+    linkedin: "https://www.linkedin.com/in/ratnesh-singhs/",
+    photo: "/images/testimonials/ratnesh-singh.webp",
+    quote:
+      "I've worked with Ayush on two products and can confidently recommend him for his native Android expertise, billing integrations, and production issue resolution. He takes ownership and consistently delivers reliable solutions.",
+  },
+];
 
 export const contact = {
   heading: "Have a product to build or an engineering problem to solve?",

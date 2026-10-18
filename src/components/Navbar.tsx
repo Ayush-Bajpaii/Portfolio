@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ChevronLeft, Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { navLinks, siteConfig } from "@/content/site";
 import { Container } from "@/components/ui/Container";
@@ -14,6 +15,10 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>("");
   const reduce = useReducedMotion();
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  // Section links are hashes on the home page; from other pages they must go home first.
+  const to = (href: string) => (href.startsWith("#") && !onHome ? `/${href}` : href);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -53,9 +58,26 @@ export function Navbar() {
         scrolled || open ? "bg-bg/90 backdrop-blur-sm" : "bg-bg",
       )}
     >
+      {!onHome && (
+        <a
+          href="/"
+          aria-label="Back to portfolio"
+          className="absolute left-1 top-7 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full text-fg transition-colors hover:bg-bg-2 sm:left-5"
+        >
+          <ChevronLeft className="size-7" strokeWidth={2.4} />
+        </a>
+      )}
       <Container className="flex h-14 items-center justify-between">
-        <Link
-          href="#top"
+        <div className={cn("flex items-center gap-2", !onHome && "pl-8 sm:pl-0")}>
+        <a
+          href={onHome ? "#top" : "/"}
+          onClick={(e) => {
+            if (!onHome) return; // let the browser navigate to "/"
+            e.preventDefault();
+            setOpen(false);
+            window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+            if (window.location.hash) history.replaceState(null, "", window.location.pathname);
+          }}
           className="group flex items-center gap-2.5 font-sans text-[12.5px] font-medium uppercase tracking-[0.12em] text-fg transition-colors hover:text-hover"
           aria-label={`${siteConfig.name}, back to top`}
         >
@@ -69,13 +91,14 @@ export function Navbar() {
             />
           )}
           <span>{siteConfig.name}</span>
-        </Link>
+        </a>
+        </div>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={to(link.href)}
               aria-current={active === link.href ? "true" : undefined}
               className={cn(
                 "relative py-2 font-sans text-[12px] font-medium uppercase tracking-[0.12em] transition-colors duration-200",
@@ -95,15 +118,17 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-5">
-          <Link
-            href="#contact"
-            className="hidden font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-muted transition-colors hover:text-hover sm:inline-flex"
-          >
-            Let&apos;s Connect
-            <span aria-hidden="true" className="ml-1.5">
-              ↗
-            </span>
-          </Link>
+          {onHome && (
+            <Link
+              href="/contact"
+              className="hidden font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-fg-muted transition-colors hover:text-hover sm:inline-flex"
+            >
+              Let&apos;s Connect
+              <span aria-hidden="true" className="ml-1.5">
+                ↗
+              </span>
+            </Link>
+          )}
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -132,20 +157,22 @@ export function Navbar() {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={to(link.href)}
                   onClick={() => setOpen(false)}
                   className="border-b border-border py-4 font-sans text-[12.5px] font-medium uppercase tracking-[0.12em] text-fg-muted transition-colors last:border-b-0 hover:text-hover"
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="py-4 font-sans text-[12.5px] font-medium uppercase tracking-[0.12em] text-fg"
-              >
-                Let&apos;s Connect ↗
-              </Link>
+              {onHome && (
+                <Link
+                  href="/contact"
+                  onClick={() => setOpen(false)}
+                  className="py-4 font-sans text-[12.5px] font-medium uppercase tracking-[0.12em] text-fg"
+                >
+                  Let&apos;s Connect ↗
+                </Link>
+              )}
             </Container>
           </motion.nav>
         )}
