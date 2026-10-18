@@ -26,9 +26,9 @@ export function CopyButton({ value, label }: { value: string; label: string }) {
           /* clipboard unavailable; the value is visible beside the button */
         }
       }}
-      className="grid size-7 place-items-center rounded-md text-fg-dim transition-colors hover:bg-bg-2 hover:text-fg"
+      className="grid size-5 place-items-center rounded text-fg-dim transition-colors hover:text-fg"
     >
-      {copied ? <Check className="size-4 text-[#22C55E]" strokeWidth={2} /> : <Copy className="size-4" strokeWidth={1.6} />}
+      {copied ? <Check className="size-3.5 text-[#22C55E]" strokeWidth={2.2} /> : <Copy className="size-3.5" strokeWidth={1.7} />}
     </button>
   );
 }

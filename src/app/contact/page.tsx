@@ -39,19 +39,19 @@ export default function ContactPage() {
                 const external = o.href.startsWith("http");
                 return (
                   <FadeIn as="li" key={o.label} delay={0.08 + 0.05 * i} className="border-b border-border">
-                    <div className="group relative grid grid-cols-[auto_1fr_auto] items-center gap-5 py-6 sm:gap-8 sm:py-7">
+                    <div className="group relative flex items-center justify-between gap-6 py-6 sm:py-7">
                       <a
                         href={o.href}
                         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                         aria-label={`${o.cta} via ${o.label}`}
                         className="absolute inset-0 z-10"
                       />
-                      <span aria-hidden="true" className="grid size-6 place-items-center" style={{ color: o.color }}>
-                        <o.Icon className="size-6" />
-                      </span>
                       <div className="min-w-0">
-                        <p className="text-base font-medium text-fg sm:text-lg">{o.label}</p>
-                        <p className="mt-0.5 flex items-center gap-1.5 text-sm text-fg-muted">
+                        <p className="flex items-center gap-3 text-base font-medium leading-none text-fg sm:text-lg">
+                          <o.Icon className="size-7 shrink-0" style={{ color: o.color }} aria-hidden="true" />
+                          {o.label}
+                        </p>
+                        <p className="-mt-0.5 flex h-5 items-center gap-1 pl-10 text-sm leading-none text-fg-muted">
                           <span className="truncate">{o.value}</span>
                           {o.copy && (
                             <span className="relative z-20 shrink-0">
