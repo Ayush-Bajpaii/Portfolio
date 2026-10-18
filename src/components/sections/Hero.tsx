@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeroPhoto } from "./HeroPhoto";
-import { GithubIcon, LinkedinIcon, MailFilledIcon, PhoneFilledIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon, MailFilledIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 
 const current = experience[0];
 
@@ -35,7 +35,7 @@ export function Hero() {
                 { label: "GitHub", href: siteConfig.social.github, Icon: GithubIcon, show: pretty(siteConfig.social.github), color: "#181717" },
                 { label: "LinkedIn", href: siteConfig.social.linkedin, Icon: LinkedinIcon, show: pretty(siteConfig.social.linkedin), color: "#0A66C2" },
                 { label: `Email ${siteConfig.email}`, href: `mailto:${siteConfig.email}`, Icon: MailFilledIcon, show: siteConfig.email, color: "#FF4F5E" },
-                { label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone.replace(/\s+/g, "")}`, Icon: PhoneFilledIcon, show: siteConfig.phone, color: "#22C55E" },
+                { label: `WhatsApp ${siteConfig.phone}`, href: `https://wa.me/${siteConfig.phone.replace(/\D/g, "")}`, Icon: WhatsappIcon, show: siteConfig.phone, color: "#25D366" },
               ].map(({ label, href, Icon, show, color }) => (
                 <li key={label} className="group relative">
                   <a
